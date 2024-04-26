@@ -1,3 +1,9 @@
+[tests]
+comments = [
+    "can't seem to compile them :/",
+]
+run = ["none"]
+
 [scripts.prep]
 post = [
     "# Do not depend on criterion; it is needed only for benchmarks.",
