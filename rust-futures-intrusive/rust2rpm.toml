@@ -1,0 +1,14 @@
+[scripts.prep]
+post = [
+    "# Do not depend on criterion; it is needed only for benchmarks.",
+    "tomcli set Cargo.toml del dev-dependencies.criterion",
+]
+
+[tests]
+skip = [
+    "if_std::mpmc_channel_tests::try_send_unbuffered_panics",
+    "local_mpmc_channel_tests::try_send_unbuffered_panics",
+]
+comments = [
+    "Tests are using debug_assert!"
+]

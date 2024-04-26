@@ -1,0 +1,73 @@
+packages:
+  rust-futures-intrusive:
+    # https://github.com/Matthias247/futures-intrusive
+    paths: [ rust-futures-intrusive ]
+    specfile_path: rust-futures-intrusive.spec
+    upstream_package_name: futures-intrusive
+    downstream_package_name: rust-futures-intrusive
+    actions: &Actions-Package-nocriterion
+      # Patch `criterion` out
+      # Need `tomcli` in BuildRequires, cannot use rust2rpm to fully generate
+      # Maybe use `sed` to add those lines?
+      fix-spec-file: []
+      create-archive:
+        - sh -c 'spectool -g -s0 ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
+        - sh -c 'echo ${PACKIT_UPSTREAM_PACKAGE_NAME}-${PACKIT_PROJECT_VERSION}.crate'
+      get-current-version:
+        - sh -c 'rpmspec -q --qf "%{Version}" --srpm ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
+  rust-sqlx:
+    # https://github.com/launchbadge/sqlx
+    paths: [ rust-sqlx ]
+    specfile_path: rust-sqlx.spec
+    upstream_package_name: sqlx
+    downstream_package_name: rust-sqlx
+    # Patch `criterion` out
+    actions: *Actions-Package-nocriterion
+  rust-sqlx-macros:
+    # https://github.com/launchbadge/sqlx
+    paths: [ rust-sqlx-macros ]
+    specfile_path: rust-sqlx-macros.spec
+    upstream_package_name: sqlx-macros
+    downstream_package_name: rust-sqlx-macros
+    actions: &Actions-Broken-License
+      <<: *Actions-Package-nocriterion
+      fix-spec-file:
+        - sh -c 'rust2rpm --ignore-missing-license-files ${PACKIT_UPSTREAM_PACKAGE_NAME}'
+  rust-sqlx-mysql:
+    # https://github.com/launchbadge/sqlx
+    paths: [ rust-sqlx-mysql ]
+    specfile_path: rust-sqlx-mysql.spec
+    upstream_package_name: sqlx-mysql
+    downstream_package_name: rust-sqlx-mysql
+    actions: *Actions-Broken-License
+  rust-sqlx-postgres:
+    # https://github.com/launchbadge/sqlx
+    paths: [ rust-sqlx-postgres ]
+    specfile_path: rust-sqlx-postgres.spec
+    upstream_package_name: sqlx-postgres
+    downstream_package_name: rust-sqlx-postgres
+    actions: *Actions-Broken-License
+  rust-sqlx-sqlite:
+    # https://github.com/launchbadge/sqlx
+    paths: [ rust-sqlx-sqlite ]
+    specfile_path: rust-sqlx-sqlite.spec
+    upstream_package_name: sqlx-sqlite
+    downstream_package_name: rust-sqlx-sqlite
+    actions: *Actions-Broken-License
+  rust-sqlx-macros-core:
+    # https://github.com/launchbadge/sqlx
+    paths: [ rust-sqlx-macros-core ]
+    specfile_path: rust-sqlx-macros-core.spec
+    upstream_package_name: sqlx-macros-core
+    downstream_package_name: rust-sqlx-macros-core
+    actions: *Actions-Broken-License
+
+srpm_build_deps:
+  - rust2rpm
+
+jobs:
+  - job: copr_build
+    trigger: commit
+    update_release: false
+    targets:
+      - fedora-all
