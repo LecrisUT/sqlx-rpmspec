@@ -14,7 +14,8 @@ License:        MIT OR Apache-2.0
 URL:            https://crates.io/crates/sqlx-sqlite
 Source:         %{crates_source}
 # # * https://github.com/launchbadge/sqlx/pull/3148
-Patch10:       sqlx-sqlite-0.7.4-Bump_libsqlite3-sys.patch
+# # * Also fix libsqlite3 features
+Patch10:       sqlx-sqlite-0.7.4-Fix_libsqlite3-sys.patch
 
 BuildRequires:  cargo-rpm-macros >= 24
 
