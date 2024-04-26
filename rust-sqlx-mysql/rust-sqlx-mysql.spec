@@ -181,7 +181,8 @@ use the "uuid" feature of the "%{crate}" crate.
 
 %if %{with check}
 %check
-%cargo_test
+# * Skip tests that require main sqlx package
+%cargo_test -- -- --skip options::MySqlConnectOptions
 %endif
 
 %changelog

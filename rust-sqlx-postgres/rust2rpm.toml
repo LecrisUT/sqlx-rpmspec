@@ -1,0 +1,5 @@
+[tests]
+comments = [
+    "benchmark tests are interfering",
+]
+run = ["none"]

@@ -1,0 +1,7 @@
+[tests]
+skip = [
+    "options::MySqlConnectOptions",
+]
+comments = [
+    "Skip tests that require main sqlx package"
+]
