@@ -37,6 +37,15 @@ packages:
       <<: *Actions-Package-no-rust2rpm
       fix-spec-file:
         - sh -c 'rust2rpm ${PACKIT_UPSTREAM_PACKAGE_NAME}'
+  rust-sqlformat:
+    # Needed by: sqlx-*
+    # https://github.com/shssoichiro/sqlformat-rs
+    paths: [ rust-sqlformat ]
+    specfile_path: rust-sqlformat.spec
+    upstream_package_name: sqlformat
+    downstream_package_name: rust-sqlformat
+    # Patch `criterion` out
+    actions: *Actions-Package-no-rust2rpm
   rust-finl_unicode:
     # Needed by: rust-stringprep
     # https://github.com/dahosek/finl_unicode
