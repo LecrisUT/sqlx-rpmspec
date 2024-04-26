@@ -70,4 +70,4 @@ jobs:
     trigger: commit
     update_release: false
     targets:
-      - fedora-all
+      - fedora-rawhide
