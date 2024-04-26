@@ -1,37 +1,11 @@
-From 561a6c71250fce04ffad75ac767c4c2872af7782 Mon Sep 17 00:00:00 2001
-From: Cody Casterline <cody.casterline@gmail.com>
-Date: Sat, 23 Mar 2024 19:19:26 -0700
-Subject: [PATCH] Bump libsqlite3-sys to v0.28
-
-This includes SQLite v3.45(.1), which includes new JSONB functionality.
----
- Cargo.toml             | 2 +-
- sqlx-sqlite/Cargo.toml | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/Cargo.toml b/Cargo.toml
-index 3602792d12..9686761d63 100644
---- a/Cargo.toml
-+++ b/Cargo.toml
-@@ -181,7 +181,7 @@ criterion = { version = "0.5.1", features = ["async_tokio"] }
- # even when SQLite isn't the intended test target, and fail if the build environment is not set up for compiling C code.
- [target.'cfg(sqlite_test_sqlcipher)'.dev-dependencies]
- # Enable testing with SQLCipher if specifically requested.
--libsqlite3-sys = { version = "0.27", features = ["bundled-sqlcipher"] }
-+libsqlite3-sys = { version = "0.28", features = ["bundled-sqlcipher"] }
-
- #
- # Any
-diff --git a/sqlx-sqlite/Cargo.toml b/sqlx-sqlite/Cargo.toml
-index dd260808fe..49d0fb0941 100644
---- a/sqlx-sqlite/Cargo.toml
-+++ b/sqlx-sqlite/Cargo.toml
-@@ -46,7 +46,7 @@ regex = { version = "1.5.5", optional = true }
- urlencoding = "2.1.3"
+--- sqlx-sqlite-0.7.4/Cargo.toml	1970-01-01T00:00:01+00:00
++++ sqlx-sqlite-0.7.4/Cargo.toml	2024-04-26T09:37:10.906548+00:00
+@@ -65,7 +65,7 @@
+ default-features = false
 
  [dependencies.libsqlite3-sys]
 -version = "0.27.0"
 +version = "0.28.0"
- default-features = false
  features = [
      "pkg-config",
+     "vcpkg",
