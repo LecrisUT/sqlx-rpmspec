@@ -1,5 +1,12 @@
+[[package.extra-patches]]
+comments = [
+    "https://github.com/launchbadge/sqlx/pull/3148"
+]
+file = "sqlx-sqlite-0.7.4-Bump_libsqlite3-sys.patch"
+number = 10
+
 [tests]
 comments = [
-    "resolve dependency loop with axum",
+    "resolve dependency loop with sqlx",
 ]
 run = ["none"]

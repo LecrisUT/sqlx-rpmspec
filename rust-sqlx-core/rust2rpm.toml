@@ -1,5 +1,5 @@
 [tests]
 comments = [
-    "resolve dependency loop with axum",
+    "resolve dependency loop with sqlx",
 ]
 run = ["none"]
