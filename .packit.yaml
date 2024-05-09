@@ -46,15 +46,14 @@ packages:
     downstream_package_name: rust-sqlformat
     # Patch `criterion` out
     actions: *Actions-Package-no-rust2rpm
-  rust-finl_unicode:
+  rust-unicode-properties:
     # Needed by: rust-stringprep
-    # https://github.com/dahosek/finl_unicode
-    paths: [ rust-finl_unicode ]
-    specfile_path: rust-finl_unicode.spec
-    upstream_package_name: finl_unicode
-    downstream_package_name: rust-finl_unicode
-    # Patch `criterion` out
-    actions: *Actions-Package-no-rust2rpm
+    # https://github.com/unicode-rs/unicode-properties
+    paths: [ rust-unicode-properties ]
+    specfile_path: rust-unicode-properties.spec
+    upstream_package_name: unicode-properties
+    downstream_package_name: rust-unicode-properties
+    actions: *Actions-Package-rust2rpm
 
   # Actual sqlx packages
   rust-sqlx:

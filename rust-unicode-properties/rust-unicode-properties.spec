@@ -2,26 +2,22 @@
 %bcond_without check
 %global debug_package %{nil}
 
-%global crate finl_unicode
+%global crate unicode-properties
 
-Name:           rust-finl_unicode
-Version:        1.2.0
+Name:           rust-unicode-properties
+Version:        0.1.1
 Release:        %autorelease
-Summary:        Library for handling Unicode functionality for finl
+Summary:        Query character Unicode properties according to UAX #44 and UTR #51
 
+# Upstream license specification: MIT/Apache-2.0
 License:        MIT OR Apache-2.0
-URL:            https://crates.io/crates/finl_unicode
+URL:            https://crates.io/crates/unicode-properties
 Source:         %{crates_source}
 
 BuildRequires:  cargo-rpm-macros >= 24
-# Do downstream crate metadata changes programmatically in %%prep. Since %%prep
-# runs before %%generate_buildrequires, we must add the following manually
-# rather than generating a dynamic BuildRequires via rust2rpm.toml.
-BuildRequires:  tomcli
 
 %global _description %{expand:
-Library for handling Unicode functionality for finl (categories and
-grapheme segmentation).}
+Query character Unicode properties according to UAX #44 and UTR #51.}
 
 %description %{_description}
 
@@ -35,6 +31,7 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
+%license %{crate_instdir}/COPYRIGHT
 %license %{crate_instdir}/LICENSE-APACHE
 %license %{crate_instdir}/LICENSE-MIT
 %doc %{crate_instdir}/README.md
@@ -52,35 +49,33 @@ use the "default" feature of the "%{crate}" crate.
 %files       -n %{name}+default-devel
 %ghost %{crate_instdir}/Cargo.toml
 
-%package     -n %{name}+categories-devel
+%package     -n %{name}+emoji-devel
 Summary:        %{summary}
 BuildArch:      noarch
 
-%description -n %{name}+categories-devel %{_description}
+%description -n %{name}+emoji-devel %{_description}
 
 This package contains library source intended for building other packages which
-use the "categories" feature of the "%{crate}" crate.
+use the "emoji" feature of the "%{crate}" crate.
 
-%files       -n %{name}+categories-devel
+%files       -n %{name}+emoji-devel
 %ghost %{crate_instdir}/Cargo.toml
 
-%package     -n %{name}+grapheme_clusters-devel
+%package     -n %{name}+general-category-devel
 Summary:        %{summary}
 BuildArch:      noarch
 
-%description -n %{name}+grapheme_clusters-devel %{_description}
+%description -n %{name}+general-category-devel %{_description}
 
 This package contains library source intended for building other packages which
-use the "grapheme_clusters" feature of the "%{crate}" crate.
+use the "general-category" feature of the "%{crate}" crate.
 
-%files       -n %{name}+grapheme_clusters-devel
+%files       -n %{name}+general-category-devel
 %ghost %{crate_instdir}/Cargo.toml
 
 %prep
 %autosetup -n %{crate}-%{version} -p1
 %cargo_prep
-# Do not depend on criterion; it is needed only for benchmarks.
-tomcli set Cargo.toml del dev-dependencies.criterion
 
 %generate_buildrequires
 %cargo_generate_buildrequires

@@ -13,6 +13,9 @@ Summary:        Implementation of the stringprep algorithm
 License:        MIT OR Apache-2.0
 URL:            https://crates.io/crates/stringprep
 Source:         %{crates_source}
+# # * https://github.com/sfackler/rust-stringprep/pull/9
+# # * Change finl_unicode dependence to unicode-properties
+Patch10:       rust-stringprep-0.1.4-Change-dependency.patch
 
 BuildRequires:  cargo-rpm-macros >= 24
 
