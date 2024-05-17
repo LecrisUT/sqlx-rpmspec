@@ -53,7 +53,8 @@ packages:
     specfile_path: rust-unicode-properties.spec
     upstream_package_name: unicode-properties
     downstream_package_name: rust-unicode-properties
-    actions: *Actions-Package-rust2rpm
+    # Patch needs to be generated with -p otherwise License is not picked up
+    actions: *Actions-Package-no-rust2rpm
 
   # Actual sqlx packages
   rust-sqlx:

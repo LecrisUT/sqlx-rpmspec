@@ -9,13 +9,11 @@ Version:        0.1.1
 Release:        %autorelease
 Summary:        Query character Unicode properties according to UAX #44 and UTR #51
 
-# Upstream license specification: MIT/Apache-2.0
-License:        MIT OR Apache-2.0
+License:        (MIT OR Apache-2.0) AND Unicode-DFS-2016
 URL:            https://crates.io/crates/unicode-properties
 Source:         %{crates_source}
-# # * https://github.com/unicode-rs/unicode-properties/pull/6
-# # * add missing Unicode license terms to crate metadata
-Patch10:       unicode-properties-fix-metadata.diff
+# Manually created patch for downstream crate metadata changes
+Patch:          unicode-properties-fix-metadata.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 

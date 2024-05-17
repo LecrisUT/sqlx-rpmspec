@@ -1,7 +1,0 @@
-[[package.extra-patches]]
-comments = [
-    "https://github.com/unicode-rs/unicode-properties/pull/6",
-    "add missing Unicode license terms to crate metadata",
-]
-file = "unicode-properties-fix-metadata.diff"
-number = 10
