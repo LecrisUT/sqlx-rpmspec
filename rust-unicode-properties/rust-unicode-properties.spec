@@ -13,6 +13,8 @@ License:        (MIT OR Apache-2.0) AND Unicode-DFS-2016
 URL:            https://crates.io/crates/unicode-properties
 Source:         %{crates_source}
 # Manually created patch for downstream crate metadata changes
+# * https://github.com/unicode-rs/unicode-properties/pull/6
+# * add missing Unicode license terms to crate metadata
 Patch:          unicode-properties-fix-metadata.diff
 
 BuildRequires:  cargo-rpm-macros >= 24

@@ -1,0 +1,5 @@
+[package]
+cargo-toml-patch-comments= [
+    "https://github.com/unicode-rs/unicode-properties/pull/6",
+    "add missing Unicode license terms to crate metadata",
+]
