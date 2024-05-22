@@ -12,6 +12,12 @@ Summary:        Macros for SQLx, the rust SQL toolkit. Not intended to be used d
 License:        MIT OR Apache-2.0
 URL:            https://crates.io/crates/sqlx-macros
 Source:         %{crates_source}
+# * Fix missing LICENSE-* files in released crates
+# * https://github.com/launchbadge/sqlx/issues/3237
+Source10:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-APACHE
+# * Fix missing LICENSE-* files in released crates
+# * https://github.com/launchbadge/sqlx/issues/3237
+Source11:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-MIT
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -30,8 +36,9 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
-# FIXME: no license files detected
 %{crate_instdir}/
+%license %{crate_instdir}/LICENSE-APACHE
+%license %{crate_instdir}/LICENSE-MIT
 
 %package     -n %{name}+default-devel
 Summary:        %{summary}
@@ -251,6 +258,7 @@ use the "uuid" feature of the "%{crate}" crate.
 
 %prep
 %autosetup -n %{crate}-%{version} -p1
+cp -p '%{SOURCE10}' '%{SOURCE11}' .
 %cargo_prep
 
 %generate_buildrequires

@@ -1,3 +1,27 @@
+[[package.extra-sources]]
+number = 10
+file = "https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-APACHE"
+comments = [
+    "Fix missing LICENSE-* files in released crates",
+    "https://github.com/launchbadge/sqlx/issues/3237",
+]
+[[package.extra-sources]]
+number = 11
+file = "https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-MIT"
+comments = [
+    "Fix missing LICENSE-* files in released crates",
+    "https://github.com/launchbadge/sqlx/issues/3237",
+]
+
+[scripts.prep]
+pre = ["cp -p '%{SOURCE10}' '%{SOURCE11}' ."]
+
+[package]
+extra-files = [
+    "%license %{crate_instdir}/LICENSE-APACHE",
+    "%license %{crate_instdir}/LICENSE-MIT",
+]
+
 [tests]
 comments = [
     "benchmark tests are interfering",
