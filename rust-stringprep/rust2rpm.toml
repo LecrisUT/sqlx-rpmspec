@@ -1,7 +1,1 @@
-[[package.extra-patches]]
-comments = [
-    "https://github.com/sfackler/rust-stringprep/pull/9",
-    "Change finl_unicode dependence to unicode-properties",
-]
-file = "rust-stringprep-0.1.4-Change-dependency.patch"
-number = 10
+
