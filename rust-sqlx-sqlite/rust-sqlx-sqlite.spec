@@ -45,8 +45,9 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
-# FIXME: no license files detected
 %{crate_instdir}/
+%license %{crate_instdir}/LICENSE-APACHE
+%license %{crate_instdir}/LICENSE-MIT
 
 %package     -n %{name}+default-devel
 Summary:        %{summary}
