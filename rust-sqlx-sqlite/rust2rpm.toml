@@ -21,13 +21,17 @@ extra-files = [
     "%license %{crate_instdir}/LICENSE-APACHE",
     "%license %{crate_instdir}/LICENSE-MIT",
 ]
+cargo-toml-patch-comments = [
+    "- Bump libsqlite3 dependency: https://github.com/launchbadge/sqlx/pull/3148",
+    "- Fix libsqlite3 features",
+]
 
 [[package.extra-patches]]
 comments = [
-    "https://github.com/launchbadge/sqlx/pull/3148",
-    "Also fix libsqlite3 features",
+    "https://github.com/launchbadge/sqlx/pull/3281",
+    "Add SQLITE_OPEN_URI to all in-memory sqlite",
 ]
-file = "sqlx-sqlite-0.7.4-Fix_libsqlite3-sys.patch"
+file = "sqlx-sqlite-0.7.4-Fix_openuri_flag.patch"
 number = 10
 
 [tests]

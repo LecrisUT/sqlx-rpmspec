@@ -19,9 +19,13 @@ Source10:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-APAC
 # * Fix missing LICENSE-* files in released crates
 # * https://github.com/launchbadge/sqlx/issues/3237
 Source11:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-MIT
-# * https://github.com/launchbadge/sqlx/pull/3148
-# * Also fix libsqlite3 features
-Patch10:       sqlx-sqlite-0.7.4-Fix_libsqlite3-sys.patch
+# Manually created patch for downstream crate metadata changes
+# * - Bump libsqlite3 dependency: https://github.com/launchbadge/sqlx/pull/3148
+# * - Fix libsqlite3 features
+Patch:          sqlx-sqlite-fix-metadata.diff
+# * https://github.com/launchbadge/sqlx/pull/3281
+# * Add SQLITE_OPEN_URI to all in-memory sqlite
+Patch10:       sqlx-sqlite-0.7.4-Fix_openuri_flag.patch
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -41,9 +45,8 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
+# FIXME: no license files detected
 %{crate_instdir}/
-%license %{crate_instdir}/LICENSE-APACHE
-%license %{crate_instdir}/LICENSE-MIT
 
 %package     -n %{name}+default-devel
 Summary:        %{summary}

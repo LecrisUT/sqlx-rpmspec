@@ -1,0 +1,21 @@
+From 6ee2e9e1c12a4ab5507e06c719fef5c8bf6e6b9f Mon Sep 17 00:00:00 2001
+From: Cristian Le <github@lecris.me>
+Date: Tue, 11 Jun 2024 06:43:02 +0200
+Subject: [PATCH] Always set SQLITE_OPEN_URI on memory sqlite
+
+---
+ sqlx-sqlite/src/connection/establish.rs | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sqlx-sqlite/src/connection/establish.rs b/sqlx-sqlite/src/connection/establish.rs
+index 6438b6b7f..d2a2e0bad 100644
+--- a/src/connection/establish.rs
++++ b/src/connection/establish.rs
+@@ -87,6 +87,7 @@ impl EstablishParams {
+ 
+         if options.in_memory {
+             flags |= SQLITE_OPEN_MEMORY;
++            flags |= libsqlite3_sys::SQLITE_OPEN_URI;
+         }
+ 
+         flags |= if options.shared_cache {
