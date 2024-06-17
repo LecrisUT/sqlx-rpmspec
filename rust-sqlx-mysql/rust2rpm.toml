@@ -16,12 +16,6 @@ comments = [
 [scripts.prep]
 pre = ["cp -p '%{SOURCE10}' '%{SOURCE11}' ."]
 
-[package]
-extra-files = [
-    "%license %{crate_instdir}/LICENSE-APACHE",
-    "%license %{crate_instdir}/LICENSE-MIT",
-]
-
 [tests]
 skip = [
     "options::MySqlConnectOptions",

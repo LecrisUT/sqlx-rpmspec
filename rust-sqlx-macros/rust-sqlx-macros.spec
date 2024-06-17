@@ -36,9 +36,9 @@ This package contains library source intended for building other packages which
 use the "%{crate}" crate.
 
 %files          devel
-%{crate_instdir}/
 %license %{crate_instdir}/LICENSE-APACHE
 %license %{crate_instdir}/LICENSE-MIT
+%{crate_instdir}/
 
 %package     -n %{name}+default-devel
 Summary:        %{summary}

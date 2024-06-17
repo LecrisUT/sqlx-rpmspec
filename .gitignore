@@ -3,3 +3,4 @@ atuin/atuin-*
 atuin/v*.tar.gz
 rust-*/*.crate
 rust-*/LICENSE-*
+*-fix-metadata-auto.diff

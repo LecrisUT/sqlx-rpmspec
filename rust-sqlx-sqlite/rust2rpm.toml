@@ -17,10 +17,6 @@ comments = [
 pre = ["cp -p '%{SOURCE10}' '%{SOURCE11}' ."]
 
 [package]
-extra-files = [
-    "%license %{crate_instdir}/LICENSE-APACHE",
-    "%license %{crate_instdir}/LICENSE-MIT",
-]
 cargo-toml-patch-comments = [
     "- Bump libsqlite3 dependency: https://github.com/launchbadge/sqlx/pull/3148",
     "- Fix libsqlite3 features",

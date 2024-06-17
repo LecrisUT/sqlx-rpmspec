@@ -17,9 +17,6 @@ Source:         %{crates_source}
 Patch:          sqlx-fix-metadata-auto.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
-# Do downstream crate metadata changes programmatically in %%prep. Since %%prep
-# runs before %%generate_buildrequires, we must add the following manually
-# rather than generating a dynamic BuildRequires via rust2rpm.toml.
 BuildRequires:  tomcli
 
 %global _description %{expand:

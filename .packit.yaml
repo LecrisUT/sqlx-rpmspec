@@ -1,22 +1,5 @@
 packages:
   # Dependencies
-  rust-futures-intrusive:
-    # Needed by: sqlx-*
-    # https://github.com/Matthias247/futures-intrusive
-    paths: [ rust-futures-intrusive ]
-    specfile_path: rust-futures-intrusive.spec
-    upstream_package_name: futures-intrusive
-    downstream_package_name: rust-futures-intrusive
-    actions: &Actions-Package-no-rust2rpm
-      # Patch `criterion` out
-      # Need `tomcli` in BuildRequires, cannot use rust2rpm to fully generate
-      # Maybe use `sed` to add those lines?
-      fix-spec-file: []
-      create-archive:
-        - sh -c 'spectool -g -s0 ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
-        - sh -c 'echo ${PACKIT_UPSTREAM_PACKAGE_NAME}-${PACKIT_PROJECT_VERSION}.crate'
-      get-current-version:
-        - sh -c 'rpmspec -q --qf "%{Version}" --srpm ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
   rust-atoi:
     # Needed by: sqlx-*
     # https://bugzilla.redhat.com/show_bug.cgi?id=2268045
@@ -25,7 +8,13 @@ packages:
     upstream_package_name: atoi
     downstream_package_name: rust-atoi
     # Don't run rust2rpm because there is already a package review
-    actions: *Actions-Package-no-rust2rpm
+    actions: &Actions-Package-no-rust2rpm
+      fix-spec-file: []
+      create-archive:
+        - sh -c 'spectool -g -s0 ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
+        - sh -c 'echo ${PACKIT_UPSTREAM_PACKAGE_NAME}-${PACKIT_PROJECT_VERSION}.crate'
+      get-current-version:
+        - sh -c 'rpmspec -q --qf "%{Version}" --srpm ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
   rust-stringprep:
     # Needed by: sqlx-*
     # https://github.com/sfackler/rust-stringprep
@@ -37,24 +26,6 @@ packages:
       <<: *Actions-Package-no-rust2rpm
       fix-spec-file:
         - sh -c 'rust2rpm ${PACKIT_UPSTREAM_PACKAGE_NAME}'
-  rust-sqlformat:
-    # Needed by: sqlx-*
-    # https://github.com/shssoichiro/sqlformat-rs
-    paths: [ rust-sqlformat ]
-    specfile_path: rust-sqlformat.spec
-    upstream_package_name: sqlformat
-    downstream_package_name: rust-sqlformat
-    # Patch `criterion` out
-    actions: *Actions-Package-no-rust2rpm
-  rust-unicode-properties:
-    # Needed by: rust-stringprep
-    # https://github.com/unicode-rs/unicode-properties
-    paths: [ rust-unicode-properties ]
-    specfile_path: rust-unicode-properties.spec
-    upstream_package_name: unicode-properties
-    downstream_package_name: rust-unicode-properties
-    # Patch needs to be generated with -p otherwise License is not picked up
-    actions: *Actions-Package-no-rust2rpm
 
   # Actual sqlx packages
   rust-sqlx:
@@ -63,39 +34,39 @@ packages:
     specfile_path: rust-sqlx.spec
     upstream_package_name: sqlx
     downstream_package_name: rust-sqlx
-    # Patch `criterion` out
-    actions: *Actions-Package-no-rust2rpm
+    actions: *Actions-Package-rust2rpm
   rust-sqlx-macros:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-macros ]
     specfile_path: rust-sqlx-macros.spec
     upstream_package_name: sqlx-macros
     downstream_package_name: rust-sqlx-macros
-    # License is manually included
-    actions: *Actions-Package-no-rust2rpm
+    actions: &Actions-Package-fix-sqlx-license
+      <<: *Actions-Package-rust2rpm
+      fix-spec-file:
+        - sh -c 'rust2rpm -I ${PACKIT_UPSTREAM_PACKAGE_NAME}'
+        - "sh -c 'sed -i \"s/# FIXME: no license files detected/cat license_files.txt/e\" ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'"
   rust-sqlx-mysql:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-mysql ]
     specfile_path: rust-sqlx-mysql.spec
     upstream_package_name: sqlx-mysql
     downstream_package_name: rust-sqlx-mysql
-    # License is manually included
-    actions: *Actions-Package-no-rust2rpm
+    actions: *Actions-Package-fix-sqlx-license
   rust-sqlx-postgres:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-postgres ]
     specfile_path: rust-sqlx-postgres.spec
     upstream_package_name: sqlx-postgres
     downstream_package_name: rust-sqlx-postgres
-    # License is manually included
-    actions: *Actions-Package-no-rust2rpm
+    actions: *Actions-Package-fix-sqlx-license
   rust-sqlx-sqlite:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-sqlite ]
     specfile_path: rust-sqlx-sqlite.spec
     upstream_package_name: sqlx-sqlite
     downstream_package_name: rust-sqlx-sqlite
-    # License is manually included
+    # Requires rust2rpm -p 
     actions: *Actions-Package-no-rust2rpm
   rust-sqlx-macros-core:
     # https://github.com/launchbadge/sqlx
@@ -103,16 +74,14 @@ packages:
     specfile_path: rust-sqlx-macros-core.spec
     upstream_package_name: sqlx-macros-core
     downstream_package_name: rust-sqlx-macros-core
-    # License is manually included
-    actions: *Actions-Package-no-rust2rpm
+    actions: *Actions-Package-fix-sqlx-license
   rust-sqlx-core:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-core ]
     specfile_path: rust-sqlx-core.spec
     upstream_package_name: sqlx-core
     downstream_package_name: rust-sqlx-core
-    # License is manually included
-    actions: *Actions-Package-no-rust2rpm
+    actions: *Actions-Package-fix-sqlx-license
 
 srpm_build_deps:
   - rust2rpm
