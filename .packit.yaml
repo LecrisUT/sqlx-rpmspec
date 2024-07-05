@@ -15,17 +15,6 @@ packages:
         - sh -c 'echo ${PACKIT_UPSTREAM_PACKAGE_NAME}-${PACKIT_PROJECT_VERSION}.crate'
       get-current-version:
         - sh -c 'rpmspec -q --qf "%{Version}" --srpm ${PACKIT_DOWNSTREAM_PACKAGE_NAME}.spec'
-  rust-stringprep:
-    # Needed by: sqlx-*
-    # https://github.com/sfackler/rust-stringprep
-    paths: [ rust-stringprep ]
-    specfile_path: rust-stringprep.spec
-    upstream_package_name: stringprep
-    downstream_package_name: rust-stringprep
-    actions: &Actions-Package-rust2rpm
-      <<: *Actions-Package-no-rust2rpm
-      fix-spec-file:
-        - sh -c 'rust2rpm ${PACKIT_UPSTREAM_PACKAGE_NAME}'
 
   # Actual sqlx packages
   rust-sqlx:
@@ -34,7 +23,10 @@ packages:
     specfile_path: rust-sqlx.spec
     upstream_package_name: sqlx
     downstream_package_name: rust-sqlx
-    actions: *Actions-Package-rust2rpm
+    actions: &Actions-Package-rust2rpm
+      <<: *Actions-Package-no-rust2rpm
+      fix-spec-file:
+        - sh -c 'rust2rpm ${PACKIT_UPSTREAM_PACKAGE_NAME}'
   rust-sqlx-macros:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-macros ]
