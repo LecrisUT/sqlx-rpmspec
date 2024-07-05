@@ -1,3 +1,6 @@
+[features]
+enable-all = true
+
 [tests]
 comments = [
     "can't seem to compile them :/",
