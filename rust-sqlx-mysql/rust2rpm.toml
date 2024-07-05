@@ -19,6 +19,13 @@ comments = [
 [scripts.prep]
 pre = ["cp -p '%{SOURCE10}' '%{SOURCE11}' ."]
 
+[package]
+cargo-toml-patch-comments = [
+    "- Fix missing chrono.clock feature",
+    "  https://github.com/launchbadge/sqlx/issues/3332",
+]
+
+
 [tests]
 skip = [
     "options::MySqlConnectOptions",

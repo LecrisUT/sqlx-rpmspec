@@ -44,14 +44,14 @@ packages:
     specfile_path: rust-sqlx-mysql.spec
     upstream_package_name: sqlx-mysql
     downstream_package_name: rust-sqlx-mysql
-    actions: *Actions-Package-fix-sqlx-license
+    actions: *Actions-Package-no-rust2rpm
   rust-sqlx-postgres:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-postgres ]
     specfile_path: rust-sqlx-postgres.spec
     upstream_package_name: sqlx-postgres
     downstream_package_name: rust-sqlx-postgres
-    actions: *Actions-Package-fix-sqlx-license
+    actions: *Actions-Package-no-rust2rpm
   rust-sqlx-sqlite:
     # https://github.com/launchbadge/sqlx
     paths: [ rust-sqlx-sqlite ]

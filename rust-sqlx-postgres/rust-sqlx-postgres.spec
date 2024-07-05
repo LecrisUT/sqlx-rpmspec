@@ -21,6 +21,10 @@ Source10:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-APAC
 Source11:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-MIT
 # Automatically generated patch to strip dependencies and normalize metadata
 Patch:          sqlx-postgres-fix-metadata-auto.diff
+# Manually created patch for downstream crate metadata changes
+# * - Fix missing chrono.clock feature
+# *   https://github.com/launchbadge/sqlx/issues/3332
+Patch:          sqlx-postgres-fix-metadata.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 

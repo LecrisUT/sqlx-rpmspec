@@ -18,6 +18,10 @@ Source10:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-APAC
 # * Fix missing LICENSE-* files in released crates
 # * https://github.com/launchbadge/sqlx/issues/3237
 Source11:       https://github.com/launchbadge/sqlx/raw/v%{version}/LICENSE-MIT
+# Manually created patch for downstream crate metadata changes
+# * - Fix missing chrono.clock feature
+# *   https://github.com/launchbadge/sqlx/issues/3332
+Patch:          sqlx-mysql-fix-metadata.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 

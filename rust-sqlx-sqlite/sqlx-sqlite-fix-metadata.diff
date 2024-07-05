@@ -1,6 +1,16 @@
 --- sqlx-sqlite-0.7.4/Cargo.toml	1970-01-01T00:00:01+00:00
-+++ sqlx-sqlite-0.7.4/Cargo.toml	2024-07-05T14:45:01.439186+00:00
-@@ -65,11 +65,8 @@
++++ sqlx-sqlite-0.7.4/Cargo.toml	2024-07-07T08:40:24.250434+00:00
+@@ -29,6 +29,9 @@
+ 
+ [dependencies.chrono]
+ version = "0.4.22"
++features = [
++    "clock",
++]
+ optional = true
+ default-features = false
+ 
+@@ -65,11 +68,8 @@
  default-features = false
  
  [dependencies.libsqlite3-sys]

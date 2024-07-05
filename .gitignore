@@ -4,3 +4,4 @@ atuin/v*.tar.gz
 rust-*/*.crate
 rust-*/LICENSE-*
 *-fix-metadata-auto.diff
+!sqlx-postgres-fix-metadata-auto.diff
